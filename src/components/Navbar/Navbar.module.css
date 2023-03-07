@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  padding: var(--xs) var(--l);
+  justify-content: space-between;
+  background: var(--light);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.logo {
+  background: var(--primary);
+  text-transform: uppercase;
+  transform: skew(-7deg);
+  width: fit-content;
+  padding: var(--xs);
+}
+
+.links {
+  display: flex;
+  gap: var(--s);
+  padding: var(--xs);
+}
+
+.link {
+  font-weight: bold;
+}
+
+.link:hover {
+  color: var(--secondary);
+  cursor: pointer;
+}

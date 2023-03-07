@@ -3,24 +3,24 @@ import { GetStaticProps } from "next";
 
 import Card from "@/components/Card";
 
-import styles from "../styles/Page.module.css";
+import styles from "../../styles/Page.module.css";
 
-import { getFeaturedEvents } from "../../data";
+import { getAllEvents } from "../../../data";
 
-import { Event } from "../../types";
+import { Event } from "../../../types";
 
 interface Props {
-  featuredEvents: Event[];
+  allEvents: Event[];
 }
 
-export default function Home({ featuredEvents }: Props) {
+export default function EventsIndex({ allEvents }: Props) {
   return (
     <>
       <Head>
-        <title>Events App | Home</title>
+        <title>Events App | Events</title>
       </Head>
       <section className={styles.section}>
-        {featuredEvents.map((event) => (
+        {allEvents.map((event) => (
           <Card key={event.id} {...event} />
         ))}
       </section>
@@ -29,9 +29,9 @@ export default function Home({ featuredEvents }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const featuredEvents = getFeaturedEvents();
+  const allEvents = getAllEvents();
 
   return {
-    props: { featuredEvents },
+    props: { allEvents },
   };
 };
