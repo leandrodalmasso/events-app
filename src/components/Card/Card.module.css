@@ -4,7 +4,7 @@
   border-radius: 5px;
   margin: 0 var(--s) var(--s);
   width: 500px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: var(--box-shadow);
 }
 
 .img {
@@ -31,7 +31,7 @@
 
 .action {
   align-self: flex-end;
-  background: var(--secondary);
+  background: var(--action);
   padding: var(--xs);
   border-radius: 5px;
   font-weight: bold;

@@ -28,6 +28,6 @@
 }
 
 .link:hover {
-  color: var(--secondary);
+  color: var(--action);
   cursor: pointer;
 }

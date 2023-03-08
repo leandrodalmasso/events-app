@@ -55,12 +55,15 @@ a {
   --light: #e9e8e8;
   --dark: #20262e;
   --primary: #913175;
-  --secondary: #cd5888;
+  --action: #cd5888;
+  --secondary: #eee8aa;
 
-  /* spacing */
+  /* sizes */
   --xs: 0.5rem;
   --s: 1rem;
   --m: 1.5rem;
   --l: 2rem;
   --xl: 4rem;
+
+  --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }

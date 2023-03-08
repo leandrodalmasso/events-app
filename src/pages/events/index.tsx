@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 
 import Card from "@/components/Card";
 
-import styles from "../../styles/Page.module.css";
+import styles from "../../styles/Lander.module.css";
 
 import { getAllEvents } from "../../../data";
 
