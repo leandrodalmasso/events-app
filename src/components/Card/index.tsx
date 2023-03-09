@@ -22,7 +22,7 @@ export default function Card({ id, image, title, date, location }: Event) {
           <h3 className={styles.info}>{location}</h3>
         </div>
         <Link href={`/events/${id}`} className={styles.action}>
-          Explore event
+          Explore
         </Link>
       </div>
     </div>

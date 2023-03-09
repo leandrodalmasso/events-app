@@ -1,8 +1,15 @@
 .section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: var(--xl) 0;
   min-height: 100vh;
+}
+
+.verticalCenter {
+  justify-content: center;
+}
+
+.msg {
+  margin-bottom: var(--s);
 }

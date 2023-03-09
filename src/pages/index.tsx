@@ -1,9 +1,6 @@
-import Head from "next/head";
 import { GetStaticProps } from "next";
 
-import Card from "@/components/Card";
-
-import styles from "../styles/Lander.module.css";
+import { EventsPage } from "@/components/EventsPage";
 
 import { getFeaturedEvents } from "../../data";
 
@@ -14,18 +11,7 @@ interface Props {
 }
 
 export default function Home({ featuredEvents }: Props) {
-  return (
-    <>
-      <Head>
-        <title>Events App | Home</title>
-      </Head>
-      <section className={styles.section}>
-        {featuredEvents.map((event) => (
-          <Card key={event.id} {...event} />
-        ))}
-      </section>
-    </>
-  );
+  return <EventsPage title="Events App | Home" events={featuredEvents} />;
 }
 
 export const getStaticProps: GetStaticProps = async () => {

@@ -1,0 +1,32 @@
+.filters {
+  background: var(--white);
+  padding: var(--s);
+  margin-bottom: var(--l);
+  border-radius: 5px;
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+}
+
+.select {
+  margin-left: var(--xs);
+  cursor: pointer;
+  padding: var(--xs);
+  font-size: var(--s);
+}
+
+.button {
+  align-self: flex-end;
+  background: var(--action);
+  padding: var(--xs);
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  font-size: var(--s);
+  width: 80px;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
