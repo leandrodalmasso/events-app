@@ -5,7 +5,7 @@ import EventDetailPage from "@/components/EventDetailPage";
 
 import { Event } from "../../../types";
 
-import { getEventById } from "../../../data";
+import { getEventById, getAllEvents } from "../../../data";
 
 export default function EventDetail({
   image,
@@ -31,8 +31,15 @@ export default function EventDetail({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const allEvents = getAllEvents();
+  const paths = allEvents.map((event) => ({
+    params: {
+      id: event.id,
+    },
+  }));
+
   return {
-    paths: ["/events/e1", "/events/e2", "/events/e3"],
+    paths,
     fallback: false,
   };
 };
