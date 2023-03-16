@@ -25,9 +25,7 @@ export default function Filters() {
       year: { value: string };
     };
 
-    const { month, year } = target;
-
-    router.push(`/events/${year.value}/${month.value}`);
+    router.push(`/events/${target.year.value}/${target.month.value}`);
   }
 
   return (
@@ -54,7 +52,7 @@ export default function Filters() {
         </select>
       </label>
 
-      <input type="submit" value="Filter" className={styles.button} />
+      <button className={styles.button}>Filter</button>
     </form>
   );
 }
