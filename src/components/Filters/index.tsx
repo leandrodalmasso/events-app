@@ -4,6 +4,10 @@ import styles from "./Filters.module.css";
 
 import { MONTHS, YEAR } from "../../../constants";
 
+interface Props {
+  isFiltered?: boolean;
+}
+
 function getYears(year: number) {
   const years = [];
 
@@ -14,18 +18,22 @@ function getYears(year: number) {
   return years;
 }
 
-export default function Filters() {
+export default function Filters({ isFiltered }: Props) {
   const router = useRouter();
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
 
-    const target = e.target as typeof e.target & {
-      month: { value: string };
-      year: { value: string };
-    };
+    if (isFiltered) {
+      router.push(`/events`);
+    } else {
+      const target = e.target as typeof e.target & {
+        month: { value: string };
+        year: { value: string };
+      };
 
-    router.push(`/events/${target.year.value}/${target.month.value}`);
+      router.push(`/events/${target.year.value}/${target.month.value}`);
+    }
   }
 
   return (
@@ -52,7 +60,9 @@ export default function Filters() {
         </select>
       </label>
 
-      <button className={styles.button}>Filter</button>
+      <button className={styles.button}>
+        {isFiltered ? "Clear" : "Filter"}
+      </button>
     </form>
   );
 }

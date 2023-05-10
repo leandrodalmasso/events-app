@@ -47,9 +47,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const eventId = params?.id || "";
   const event = getEventById(eventId as string);
-  const props = !!event ? { ...event } : {};
 
   return {
-    props,
+    props: { ...event },
   };
 };

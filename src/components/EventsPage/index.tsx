@@ -12,9 +12,10 @@ interface Props {
   title: string;
   events: Event[];
   showFilters?: boolean;
+  isFiltered?: boolean;
 }
 
-export function EventsPage({ title, events, showFilters }: Props) {
+export function EventsPage({ title, events, showFilters, isFiltered }: Props) {
   return (
     <>
       <Head>
@@ -23,7 +24,7 @@ export function EventsPage({ title, events, showFilters }: Props) {
       <section
         className={clsx(styles.section, !showFilters && styles.verticalCenter)}
       >
-        {showFilters && <Filters />}
+        {showFilters && <Filters isFiltered={isFiltered} />}
         {!!events.length ? (
           events.map((event) => <Card key={event.id} {...event} />)
         ) : (

@@ -19,5 +19,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { featuredEvents },
+    // revalidate: 3600,
   };
 };

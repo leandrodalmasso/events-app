@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetServerSideProps } from "next";
 
 import { EventsPage } from "@/components/EventsPage";
 
@@ -16,18 +16,12 @@ export default function FilteredEvents({ filteredEvents }: Props) {
       title="Events App | Events"
       events={filteredEvents}
       showFilters
+      isFiltered
     />
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const [year, month] = context?.params?.slug as string[];
 
   const filteredEvents = getFilteredEvents({
