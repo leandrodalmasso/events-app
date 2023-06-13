@@ -57,6 +57,7 @@ a {
   --primary: #913175;
   --action: #cd5888;
   --secondary: #eee8aa;
+  --tertiary: rgb(137, 201, 180);
 
   /* sizes */
   --xs: 0.5rem;

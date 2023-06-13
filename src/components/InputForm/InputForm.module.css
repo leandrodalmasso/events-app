@@ -1,0 +1,10 @@
+.form {
+  padding: var(--m);
+  margin: var(--l);
+  background-color: var(--secondary);
+  border-radius: 5px;
+}
+
+.title {
+  text-align: center;
+}

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 
-import { EventsPage } from "@/components/EventsPage";
+import EventsPage from "@/components/EventsPage";
 
 import { getFilteredEvents } from "../../../data";
 

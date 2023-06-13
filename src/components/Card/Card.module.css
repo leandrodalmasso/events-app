@@ -28,15 +28,3 @@
   opacity: 0.8;
   font-size: 0.8rem;
 }
-
-.action {
-  align-self: flex-end;
-  background: var(--action);
-  padding: var(--xs);
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-.action:hover {
-  opacity: 0.8;
-}

@@ -3,12 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--xl) 0;
+  padding-top: 150px;
   min-height: 100vh;
   background: linear-gradient(
     to bottom,
-    var(--primary) 40%,
-    var(--secondary) 40%
+    var(--primary) 30%,
+    var(--secondary) 30%
   );
 }
 

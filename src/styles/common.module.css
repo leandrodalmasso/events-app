@@ -1,0 +1,27 @@
+.action {
+  align-self: flex-end;
+  background: var(--action);
+  padding: var(--xs);
+  margin: var(--xs);
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.action:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.input {
+  padding: var(--xs);
+  /* margin: var(--xs); */
+  border-radius: 5px;
+  border-color: transparent;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+}

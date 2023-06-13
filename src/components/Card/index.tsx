@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Event } from "../../../types";
 
+import commonStyles from "../../styles/common.module.css";
 import styles from "./Card.module.css";
 
 export default function Card({ id, image, title, date, location }: Event) {
@@ -21,7 +22,7 @@ export default function Card({ id, image, title, date, location }: Event) {
           <h3 className={styles.info}>{date}</h3>
           <h3 className={styles.info}>{location}</h3>
         </div>
-        <Link href={`/events/${id}`} className={styles.action}>
+        <Link href={`/events/${id}`} className={commonStyles.action}>
           Explore
         </Link>
       </div>

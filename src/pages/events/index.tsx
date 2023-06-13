@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 
-import { EventsPage } from "@/components/EventsPage";
+import EventsPage from "@/components/EventsPage";
 
 import { getAllEvents } from "../../../data";
 

@@ -1,0 +1,7 @@
+.comment {
+  background-color: var(--white);
+  border-radius: 5px;
+  padding: var(--xs);
+  margin: var(--xs);
+  min-width: 600px;
+}

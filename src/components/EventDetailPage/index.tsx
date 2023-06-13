@@ -1,6 +1,11 @@
 import Image from "next/image";
 
+import CommentsForm from "../CommentsForm";
+import CommentsList from "../CommentsList";
+
 import styles from "./EventDetailPage.module.css";
+
+import { COMMENTS } from "../../../data";
 
 interface Props {
   image: string;
@@ -34,6 +39,15 @@ export default function EventDetailPage({
         </div>
       </div>
       <p className={styles.description}>{description}</p>
+      <CommentsForm
+        action={(e: React.SyntheticEvent) => {
+          e.preventDefault();
+          console.log("registration success!");
+        }}
+        actionText="Comment"
+        text="Leave a comment"
+      />
+      <CommentsList comments={COMMENTS} />
     </section>
   );
 }
