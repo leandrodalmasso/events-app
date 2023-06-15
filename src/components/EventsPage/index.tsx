@@ -8,6 +8,7 @@ import InputForm from "../InputForm";
 import styles from "./EventsPage.module.css";
 
 import { Event } from "../../../types";
+import React, { useState } from "react";
 
 interface Props {
   title: string;
@@ -22,9 +23,32 @@ export default function EventsPage({
   showFilters,
   isFiltered,
 }: Props) {
+  const [email, setEmail] = useState<string>("");
+
   const handleRegistration = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log("registration success!");
+
+    fetch("/api/newsletter", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
+  const handleInputChange = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    console.log("e.target: ", e.target);
+
+    const target = e.target as typeof e.target & {
+      value: string;
+    };
+
+    setEmail(target.value);
   };
 
   return (
@@ -39,6 +63,8 @@ export default function EventsPage({
           action={handleRegistration}
           actionText="Register"
           text="Sign up to stay updated!"
+          inputValue={email}
+          onInputChange={handleInputChange}
         />
         {showFilters && <Filters isFiltered={isFiltered} />}
         {!!events.length ? (

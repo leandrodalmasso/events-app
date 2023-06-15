@@ -14,3 +14,8 @@ export const MONTHS = [
 ];
 
 export const YEAR = 2023;
+
+export enum METHODS {
+  GET = "GET",
+  POST = "POST",
+}
