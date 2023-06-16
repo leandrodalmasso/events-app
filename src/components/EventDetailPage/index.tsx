@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import CommentsForm from "../CommentsForm";
@@ -5,7 +6,7 @@ import CommentsList from "../CommentsList";
 
 import styles from "./EventDetailPage.module.css";
 
-import { COMMENTS } from "../../../data";
+import { Comment } from "../../../types";
 
 interface Props {
   image: string;
@@ -13,6 +14,7 @@ interface Props {
   date: string;
   location: string;
   description: string;
+  eventId: string;
 }
 
 export default function EventDetailPage({
@@ -21,7 +23,16 @@ export default function EventDetailPage({
   date,
   location,
   description,
+  eventId,
 }: Props) {
+  const [comments, setComments] = useState<Comment[]>([]);
+
+  useEffect(() => {
+    fetch(`/api/comments/${eventId}`)
+      .then((res) => res.json())
+      .then(({ comments }) => setComments(comments));
+  }, [eventId]);
+
   return (
     <section className={styles.section}>
       <h2 className={styles.title}>{title}</h2>
@@ -39,15 +50,8 @@ export default function EventDetailPage({
         </div>
       </div>
       <p className={styles.description}>{description}</p>
-      <CommentsForm
-        action={(e: React.SyntheticEvent) => {
-          e.preventDefault();
-          console.log("registration success!");
-        }}
-        actionText="Comment"
-        text="Leave a comment"
-      />
-      <CommentsList comments={COMMENTS} />
+      <CommentsForm eventId={eventId} />
+      <CommentsList comments={comments} />
     </section>
   );
 }

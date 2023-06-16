@@ -1,16 +1,38 @@
+import React, { useRef } from "react";
+
 import styles from "./CommentsForm.module.css";
 import commonStyles from "../../styles/common.module.css";
 
 interface Props {
-  action: (e: React.SyntheticEvent) => void;
-  actionText: string;
-  text: string;
+  eventId: string;
 }
 
-export default function CommentsForm({ action, actionText, text }: Props) {
+export default function CommentsForm({ eventId }: Props) {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const commentRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    fetch(`/api/comments/${eventId}`, {
+      method: "POST",
+      body: JSON.stringify({
+        email: emailRef?.current?.value,
+        name: nameRef?.current?.value,
+        comment: commentRef?.current?.value,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
-    <form onSubmit={action} className={styles.form}>
-      <h2 className={styles.title}>{text}</h2>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <h2 className={styles.title}>Leave us a comment</h2>
       <span>
         <span className={styles.row}>
           <div className={styles.element}>
@@ -22,6 +44,7 @@ export default function CommentsForm({ action, actionText, text }: Props) {
               id="email"
               name="email"
               className={commonStyles.input}
+              ref={emailRef}
             />
           </div>
 
@@ -34,6 +57,7 @@ export default function CommentsForm({ action, actionText, text }: Props) {
               id="name"
               name="name"
               className={commonStyles.input}
+              ref={nameRef}
             />
           </div>
         </span>
@@ -43,9 +67,10 @@ export default function CommentsForm({ action, actionText, text }: Props) {
             Your comment
           </label>
           <textarea
-            id="name"
-            name="name"
+            id="comment"
+            name="comment"
             className={`${commonStyles.input} ${styles.textarea}`}
+            ref={commentRef}
           />
         </div>
 
@@ -53,7 +78,7 @@ export default function CommentsForm({ action, actionText, text }: Props) {
           type="submit"
           className={`${commonStyles.action} ${styles.button}`}
         >
-          {actionText}
+          Post
         </button>
       </span>
     </form>

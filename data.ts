@@ -61,24 +61,3 @@ export function getFilteredEvents(dateFilter: DateFilter) {
 export function getEventById(id: string) {
   return DUMMY_EVENTS.find((event) => event.id === id);
 }
-
-export const COMMENTS = [
-  {
-    id: 0,
-    text: "Hi, what a great event!!",
-    author: "Joe",
-    mail: "joe@gmail.com",
-  },
-  {
-    id: 1,
-    text: "I love this event!!",
-    author: "Mary",
-    mail: "mary@gmail.com",
-  },
-  {
-    id: 2,
-    text: "I hope I can join!!",
-    author: "SK8ter",
-    mail: "skater89@gmail.com",
-  },
-];

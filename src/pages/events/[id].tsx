@@ -8,6 +8,7 @@ import { Event } from "../../../types";
 import { getEventById, getAllEvents } from "../../../data";
 
 export default function EventDetail({
+  id,
   image,
   title,
   date,
@@ -25,6 +26,7 @@ export default function EventDetail({
         date={date}
         location={location}
         description={description}
+        eventId={id}
       />
     </>
   );
