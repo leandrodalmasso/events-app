@@ -20,8 +20,7 @@ export default async function handler(
       return;
     }
 
-    const uri =
-      "mongodb+srv://leandrodalmasso:Zamba34345@cluster0.tlgtukr.mongodb.net/?retryWrites=true&w=majority";
+    const uri = process.env.DB_URI || "";
     const client = new MongoClient(uri);
     await client.connect();
     const dbName = "newsletter";
