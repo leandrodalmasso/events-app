@@ -1,63 +1,63 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { Comment } from "../../../../types";
+import {
+  connectToDb,
+  insertComment,
+  getComments,
+  setRes,
+} from "../../../../dbHelpers";
+
+import { ResData } from "../../../../types";
 
 import { METHODS } from "../../../../constants";
 
-type Data = {
-  message?: string;
-  comments?: Comment[];
-};
-
-const COMMENTS = [
-  {
-    id: 0,
-    text: "Hi, what a great event!!",
-    author: "Joe",
-    mail: "joe@gmail.com",
-  },
-  {
-    id: 1,
-    text: "I love this event!!",
-    author: "Mary",
-    mail: "mary@gmail.com",
-  },
-  {
-    id: 2,
-    text: "I hope I can join!!",
-    author: "SK8ter",
-    mail: "skater89@gmail.com",
-  },
-];
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ResData>
 ) {
-  // const eventId = req.query.eventId;
+  const eventId = req.query.eventId as string;
+  const { email, author, comment } = req.body;
+
+  let client;
+  try {
+    client = await connectToDb();
+  } catch (error) {
+    setRes(res, 500, "Connection to db failed.");
+    return;
+  }
 
   if (req.method === METHODS.POST) {
-    const { email, name, comment } = req.body;
-
     if (!email || !email.includes("@")) {
-      res.status(422).json({ message: "Invalid email address." });
+      setRes(res, 422, "Invalid email address.");
       return;
     }
 
-    if (!name) {
-      res.status(422).json({ message: "Invalid name." });
+    if (!author) {
+      setRes(res, 422, "Invalid author.");
       return;
     }
 
     if (!comment) {
-      res.status(422).json({ message: "Invalid comment message." });
+      setRes(res, 422, "Invalid comment message.");
       return;
     }
 
-    res.status(200).json({ message: "Comment has been saved!!" });
+    try {
+      await insertComment(client, { email, author, comment, eventId });
+      setRes(res, 200, "Comment has been saved!!");
+    } catch (error) {
+      setRes(res, 503, "DB insertion failed.");
+      return;
+    }
   }
 
   if (req.method === METHODS.GET) {
-    res.status(200).json({ comments: COMMENTS });
+    try {
+      const comments = await getComments(client, { eventId });
+      res.status(200).json({ comments });
+    } catch (error) {
+      setRes(res, 503, "Couldn't get comments from the DB.");
+      return;
+    }
   }
 }

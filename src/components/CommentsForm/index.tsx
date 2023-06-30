@@ -9,7 +9,7 @@ interface Props {
 
 export default function CommentsForm({ eventId }: Props) {
   const emailRef = useRef<HTMLInputElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
+  const authorRef = useRef<HTMLInputElement>(null);
   const commentRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -19,7 +19,7 @@ export default function CommentsForm({ eventId }: Props) {
       method: "POST",
       body: JSON.stringify({
         email: emailRef?.current?.value,
-        name: nameRef?.current?.value,
+        author: authorRef?.current?.value,
         comment: commentRef?.current?.value,
       }),
       headers: {
@@ -36,7 +36,7 @@ export default function CommentsForm({ eventId }: Props) {
       <span>
         <span className={styles.row}>
           <div className={styles.element}>
-            <label htmlFor="name" className={styles.label}>
+            <label htmlFor="email" className={styles.label}>
               Your email
             </label>
             <input
@@ -49,21 +49,21 @@ export default function CommentsForm({ eventId }: Props) {
           </div>
 
           <div className={styles.element}>
-            <label htmlFor="name" className={styles.label}>
+            <label htmlFor="author" className={styles.label}>
               Your name
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
+              id="author"
+              name="author"
               className={commonStyles.input}
-              ref={nameRef}
+              ref={authorRef}
             />
           </div>
         </span>
 
         <div className={styles.element}>
-          <label htmlFor="name" className={styles.label}>
+          <label htmlFor="comment" className={styles.label}>
             Your comment
           </label>
           <textarea

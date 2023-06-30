@@ -2,22 +2,21 @@ import Comment from "./Comment";
 
 import styles from "./CommentList.module.css";
 
-interface Comment {
-  id: number;
-  text: string;
-  author: string;
-  mail: string;
-}
+import { Comment as CommentType } from "../../../types";
 
 interface Props {
-  comments: Comment[];
+  comments: CommentType[];
 }
 
 export default function CommentsList({ comments }: Props) {
   return (
     <div className={styles.commentList}>
       {comments.map((comment) => (
-        <Comment key={comment.id} text={comment.text} author={comment.author} />
+        <Comment
+          key={comment._id.toString()}
+          text={comment.comment}
+          author={comment.author}
+        />
       ))}
     </div>
   );

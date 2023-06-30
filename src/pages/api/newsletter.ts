@@ -1,35 +1,32 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { MongoClient } from "mongodb";
+
+import { ResData } from "../../../types";
 
 import { METHODS } from "../../../constants";
-
-type Data = {
-  message: string;
-};
+import { connectToDb, setRes, registerEmail } from "../../../dbHelpers";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<ResData>
 ) {
   if (req.method === METHODS.POST) {
     const email = req.body.email;
 
     if (!email || !email.includes("@")) {
-      res.status(422).json({ message: "Invalid email address." });
+      setRes(res, 422, "Invalid email address.");
       return;
     }
 
-    const uri = process.env.DB_URI || "";
-    const client = new MongoClient(uri);
-    await client.connect();
-    const dbName = "newsletter";
-    const collectionName = "emails";
-    const database = client.db(dbName);
-    const collection = database.collection(collectionName);
-    await collection.insertOne({ email });
-    client.close();
+    let client;
+    try {
+      client = await connectToDb();
+    } catch (error) {
+      setRes(res, 500, "Connection to db failed.");
+      return;
+    }
 
-    res.status(200).json({ message: "Signed up!!" });
+    await registerEmail(client, email);
+    setRes(res, 200, "Signed up!!");
   }
 }

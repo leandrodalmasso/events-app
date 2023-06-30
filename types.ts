@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export interface Event {
   id: string;
   title: string;
@@ -9,8 +11,14 @@ export interface Event {
 }
 
 export interface Comment {
-  id: number;
-  text: string;
+  _id: ObjectId;
+  comment: string;
   author: string;
-  mail: string;
+  email: string;
+  eventId: string;
+}
+
+export interface ResData {
+  message?: string;
+  comments?: Comment[];
 }
