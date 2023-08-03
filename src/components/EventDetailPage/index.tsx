@@ -26,12 +26,16 @@ export default function EventDetailPage({
   eventId,
 }: Props) {
   const [comments, setComments] = useState<Comment[]>([]);
+  const [reloadComments, setReloadComments] = useState<boolean>(false);
 
   useEffect(() => {
     fetch(`/api/comments/${eventId}`)
       .then((res) => res.json())
-      .then(({ comments }) => setComments(comments));
-  }, [eventId]);
+      .then(({ comments }) => setComments(comments))
+      .finally(() => {
+        if (reloadComments) setReloadComments(false);
+      });
+  }, [eventId, reloadComments]);
 
   return (
     <section className={styles.section}>
@@ -50,7 +54,10 @@ export default function EventDetailPage({
         </div>
       </div>
       <p className={styles.description}>{description}</p>
-      <CommentsForm eventId={eventId} />
+      <CommentsForm
+        eventId={eventId}
+        onCommentAdded={() => setReloadComments(true)}
+      />
       <CommentsList comments={comments} />
     </section>
   );

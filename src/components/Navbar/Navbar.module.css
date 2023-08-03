@@ -2,7 +2,7 @@
   display: flex;
   padding: var(--xs) var(--l);
   justify-content: space-between;
-  background: var(--light);
+  background: var(--primary);
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,7 +10,8 @@
 }
 
 .logo {
-  background: var(--primary);
+  color: var(--white);
+  background: var(--black);
   text-transform: uppercase;
   transform: skew(-7deg);
   width: fit-content;

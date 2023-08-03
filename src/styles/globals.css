@@ -58,6 +58,9 @@ a {
   --action: #cd5888;
   --secondary: #eee8aa;
   --tertiary: rgb(137, 201, 180);
+  --green: #23c552;
+  --red: #f84f31;
+  --blue: #009ddc;
 
   /* sizes */
   --xs: 0.5rem;

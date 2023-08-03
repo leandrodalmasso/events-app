@@ -7,9 +7,11 @@ import Layout from "@/components/Layout";
 
 import "@/styles/globals.css";
 
+import { NotificationContextProvider } from "../../store/notification-context";
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <NotificationContextProvider>
       <Head>
         <title>Events App</title>
         <meta name="description" content="Events App" />
@@ -20,6 +22,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Layout>
       </main>
-    </>
+    </NotificationContextProvider>
   );
 }

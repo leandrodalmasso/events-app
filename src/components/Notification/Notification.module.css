@@ -1,0 +1,23 @@
+.notification {
+  width: 400px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  position: sticky;
+  border-radius: 5px;
+  left: calc(100vw - 400px - var(--l));
+  bottom: var(--l);
+}
+
+.notificationGreen {
+  background: var(--green);
+}
+
+.notificationRed {
+  background: var(--red);
+}
+
+.notificationBlue {
+  background: var(--blue);
+}

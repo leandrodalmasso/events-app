@@ -1,19 +1,25 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
+
+import NotificationContext from "../../../store/notification-context";
 
 import styles from "./CommentsForm.module.css";
 import commonStyles from "../../styles/common.module.css";
 
 interface Props {
   eventId: string;
+  onCommentAdded: () => void;
 }
 
-export default function CommentsForm({ eventId }: Props) {
+export default function CommentsForm({ eventId, onCommentAdded }: Props) {
   const emailRef = useRef<HTMLInputElement>(null);
   const authorRef = useRef<HTMLInputElement>(null);
   const commentRef = useRef<HTMLTextAreaElement>(null);
 
+  const notificationCtx = useContext(NotificationContext);
+
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    let error = false;
 
     fetch(`/api/comments/${eventId}`, {
       method: "POST",
@@ -26,8 +32,28 @@ export default function CommentsForm({ eventId }: Props) {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((res) => {
+        if (res.status === 200) {
+          notificationCtx.showNotification({
+            message: "Your comment was saved, thanks!",
+            color: "green",
+          });
+        } else {
+          error = true;
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        if (!error) {
+          onCommentAdded();
+        } else {
+          notificationCtx.showNotification({
+            message: data.message,
+            color: "red",
+          });
+        }
+      });
   };
 
   return (
